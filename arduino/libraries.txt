@@ -1,0 +1,108 @@
+# Librerías necesarias para el proyecto Arduino
+
+## Librerías requeridas:
+
+1. **TinyGPS++** - Para manejo de datos GPS
+   - Autor: Mikal Hart
+   - Instalación: Arduino IDE → Herramientas → Administrar librerías → Buscar "TinyGPS++"
+
+2. **ArduinoJson** - Para manejo de JSON
+   - Autor: Benoit Blanchon
+   - Instalación: Arduino IDE → Herramientas → Administrar librerías → Buscar "ArduinoJson"
+
+## Instalación manual:
+
+### TinyGPS++
+```bash
+# Descargar desde: https://github.com/mikalhart/TinyGPSPlus
+# O instalar via Arduino IDE Library Manager
+```
+
+### ArduinoJson
+```bash
+# Descargar desde: https://github.com/bblanchon/ArduinoJson
+# O instalar via Arduino IDE Library Manager
+```
+
+## Configuración del Arduino IDE:
+
+1. Abrir Arduino IDE
+2. Ir a Archivo → Preferencias
+3. En "URLs adicionales de Administrador de tarjetas" agregar:
+   - Para ESP32: https://dl.espressif.com/dl/package_esp32_index.json
+   - Para ESP8266: http://arduino.esp8266.com/stable/package_esp8266com_index.json
+
+4. Ir a Herramientas → Placa → Administrador de tarjetas
+5. Instalar:
+   - ESP32 (si usas ESP32)
+   - ESP8266 (si usas ESP8266)
+
+## Configuración de pines:
+
+### Arduino Uno/Nano:
+- OBD_RX: Pin 2
+- OBD_TX: Pin 3
+- GPS_RX: Pin 4
+- GPS_TX: Pin 5
+- GSM_RX: Pin 6
+- GSM_TX: Pin 7
+- LED_PIN: Pin 13
+- POWER_PIN: Pin 8
+
+### ESP32:
+- OBD_RX: GPIO 16
+- OBD_TX: GPIO 17
+- GPS_RX: GPIO 18
+- GPS_TX: GPIO 19
+- GSM_RX: GPIO 21
+- GSM_TX: GPIO 22
+- LED_PIN: GPIO 2
+- POWER_PIN: GPIO 4
+
+## Conexiones del hardware:
+
+### ELM327 OBD-II:
+- VCC → 5V (Arduino) / 3.3V (ESP32)
+- GND → GND
+- TX → OBD_RX
+- RX → OBD_TX
+
+### GPS NEO-6M:
+- VCC → 5V (Arduino) / 3.3V (ESP32)
+- GND → GND
+- TX → GPS_RX
+- RX → GPS_TX
+
+### SIM800L:
+- VCC → 5V (Arduino) / 3.3V (ESP32)
+- GND → GND
+- TX → GSM_RX
+- RX → GSM_TX
+- RST → GPIO (opcional)
+
+## Configuración del servidor:
+
+1. Cambiar SERVER_URL en el código Arduino
+2. Configurar VEHICLE_ID único para cada dispositivo
+3. Ajustar TRANSMISSION_INTERVAL según necesidades
+4. Configurar credenciales GSM si es necesario
+
+## Troubleshooting:
+
+### GPS no funciona:
+- Verificar conexiones
+- Esperar hasta 10 minutos para primera señal
+- Verificar antena GPS
+- Comprobar voltaje de alimentación
+
+### OBD-II no responde:
+- Verificar que el vehículo esté encendido
+- Comprobar conexión al puerto OBD-II
+- Verificar protocolo del vehículo
+- Revisar códigos de error
+
+### GSM no transmite:
+- Verificar tarjeta SIM
+- Comprobar señal de red
+- Verificar configuración APN
+- Revisar saldo de datos
